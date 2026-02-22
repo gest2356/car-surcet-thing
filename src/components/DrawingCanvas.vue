@@ -1,19 +1,21 @@
 ﻿<script setup lang="ts">
 import {useTileStore} from "../store/useTileStore.ts";
-import {onMounted, onUnmounted, reactive, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
+
+function removeTile(n: number) {
+  if (store.placedTiles[n]){
+   delete store.placedTiles[n];
+  }else {
+    return
+  }
+}
 
 const store = useTileStore();
 const selectedPixel = ref(0);
 
-interface Tile {
-  img: string;
-  rotation: number;
-}
-
-const placedTiles = reactive<Record<number, Tile>>({});
 
 const placeTile = (n: number) => {
-  placedTiles[n] = {
+  store.placedTiles[n] = {
   img:  store.storedTileIMG!,
   rotation: 0
   }
@@ -21,7 +23,7 @@ const placeTile = (n: number) => {
 
 const rotateTile = (event: KeyboardEvent) => {
   if (event.key.toLowerCase() === "r" && selectedPixel.value !== 0) {
-    placedTiles[selectedPixel.value]!.rotation += 90
+    store.placedTiles[selectedPixel.value]!.rotation += 90
   }
 }
 
@@ -45,14 +47,15 @@ const canvasHeight = 25;
        :class="{ hovered: selectedPixel === n }"
        @mouseover="selectedPixel = n"
        @click="placeTile(n)"
+       @dblclick="removeTile(n)"
        :style="{
-         backgroundImage: placedTiles[n]
-           ? `url(/src/assets/PalletComponentsIMGS/${placedTiles[n].img})`
+         backgroundImage: store.placedTiles[n]
+           ? `url(/src/assets/PalletComponentsIMGS/${store.placedTiles[n].img})`
            : 'none',
-         transform: placedTiles[n]
-           ? `rotate(${placedTiles[n].rotation}deg)`
+         transform: store.placedTiles[n]
+           ? `rotate(${store.placedTiles[n].rotation}deg)`
            : 'rotate(0deg)',
-         backgroundColor: placedTiles[n] ? 'transparent' : 'white'
+         backgroundColor: store.placedTiles[n] ? 'transparent' : 'white'
        }"
   ></div>
 
@@ -64,14 +67,14 @@ const canvasHeight = 25;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(v-bind(canvasWidth), 16px);
-  grid-template-rows: repeat(v-bind(canvasHeight), 16px );
+  grid-template-columns: repeat(v-bind(canvasWidth), 64px);
+  grid-template-rows: repeat(v-bind(canvasHeight), 64px );
   gap: 1px;
 }
 
 .pixel {
-  width: 16px;
-  height: 16px;
+  width: 64px;
+  height: 64px;
   background-size: contain;
 }
 

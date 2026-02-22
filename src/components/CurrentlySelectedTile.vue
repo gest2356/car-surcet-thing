@@ -15,7 +15,7 @@ const store = useTileStore();
 
 <style scoped>
 #tile-selected img{
-  width: 32px;
-  height: 32px;
+  width: 128px;
+  height: 128px;
 }
 </style>

@@ -1,8 +1,13 @@
 ﻿<script setup lang="ts">
-const emit = defineEmits(['close'])
+import {useTileStore} from "../store/useTileStore.ts";
 
-function closeMenu() {
+const emit = defineEmits(['close'])
+const store = useTileStore();
+
+
+function newSurcet() {
   emit('close')
+  store.clearCanvas()
 }
 </script>
 
@@ -11,7 +16,7 @@ function closeMenu() {
     <div id="menu-content">
       <h1>Car surcet Thing</h1>
       <span>Make your dream surcet a reality</span>
-      <button @click="closeMenu">New surcet</button>
+      <button @click="newSurcet">New surcet</button>
     </div>
   </div>
 </template>
