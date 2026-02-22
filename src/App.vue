@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import Menu from "./components/Menu.vue"
 import SurcetPallet from "./components/SurcetPallet.vue";
 import CurrentlySelectedTile from "./components/CurrentlySelectedTile.vue";
+import DrawingCanvas from "./components/DrawingCanvas.vue";
 
 const showMenu = ref(true)
 </script>
@@ -15,6 +16,7 @@ const showMenu = ref(true)
     <div id="drawing-components">
       <SurcetPallet />
       <CurrentlySelectedTile />
+      <DrawingCanvas />
     </div>
 
   </div>

@@ -7,7 +7,7 @@ const store = useTileStore();
 <template>
   <div id="currently-selected-tile">
     <div id="tile-selected">
-      <span>{{store.storedTileName}}</span>
+      <span>selected: {{store.storedTileName}}</span>
       <img :src="`/src/assets/PalletComponentsIMGS/${store.storedTileIMG}`" alt="dskk">
     </div> 
   </div>
