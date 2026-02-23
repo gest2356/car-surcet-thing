@@ -35,13 +35,22 @@ onUnmounted(() => {
   window.removeEventListener("keydown", rotateTile)
 })
 
-const canvasWidth = 25;
-const canvasHeight = 25;
+const props = withDefaults(
+    defineProps<{
+      canvasWidth?: number
+      canvasHeight?: number
+    }>(),
+    {
+      canvasWidth: 25,
+      canvasHeight: 25
+    }
+)
+
 </script>
 
 <template>
 <div id="canvas-container">
-  <div v-for="n in canvasHeight * canvasWidth"
+  <div v-for="n in props.canvasHeight * props.canvasWidth"
        :key="n"
        class="pixel"
        :class="{ hovered: selectedPixel === n }"
@@ -67,8 +76,8 @@ const canvasHeight = 25;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(v-bind(canvasWidth), 64px);
-  grid-template-rows: repeat(v-bind(canvasHeight), 64px );
+  grid-template-columns: repeat(v-bind(props.canvasWidth), 64px);
+  grid-template-rows: repeat(v-bind(props.canvasHeight), 64px );
   gap: 1px;
 }
 

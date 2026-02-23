@@ -4,8 +4,18 @@ import Menu from "./components/Menu.vue"
 import SurcetPallet from "./components/SurcetPallet.vue";
 import CurrentlySelectedTile from "./components/CurrentlySelectedTile.vue";
 import DrawingCanvas from "./components/DrawingCanvas.vue";
+import CanvasSizeMenu from "./components/CanvasSizeMenu.vue";
 
 const showMenu = ref(true)
+
+function changeGridSize(x: number, y: number) {
+  gridWidth.value = x
+  gridHeight.value = y
+}
+
+let gridWidth = ref<number>(25)
+let gridHeight = ref<number>(25)
+
 </script>
 
 <template>
@@ -16,7 +26,9 @@ const showMenu = ref(true)
     <div id="drawing-components">
       <SurcetPallet />
       <CurrentlySelectedTile />
-      <DrawingCanvas />
+      <DrawingCanvas :canvasWidth="gridWidth" :canvasHeight="gridHeight" />
+      <CanvasSizeMenu @grid-size="changeGridSize" />
+
     </div>
 
   </div>
