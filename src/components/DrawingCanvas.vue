@@ -10,14 +10,164 @@ function removeTile(n: number) {
   }
 }
 
+const smartRoadChack = ref<boolean>(false);
+
 const store = useTileStore();
 const selectedPixel = ref(0);
 
+function chackSmartRoadLeft(n: number) {
 
+  //const tileLeft = store.placedTiles[n - 1]
+  //const tileRight = store.placedTiles[n + 1]?.img
+  const tileLeftBottom = store.placedTiles[n - props.canvasWidth +1]?.img
+  const tileRightTop = store.placedTiles[n + props.canvasHeight + 1]?.img
+
+  if (tileRightTop === 'RoadCurve.png' || tileRightTop === 'RoadStrait.png') {
+    store.placedTiles[n+1] = {
+      img:  'RoadInterSection.png',
+      rotation: 0
+    }
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+  if (tileLeftBottom === 'RoadCurve.png' || tileLeftBottom === 'RoadStrait.png'){
+    store.placedTiles[n+1] = {
+      img:  'RoadInterSection.png',
+      rotation: 0
+    }
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+  }
+  }else {
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+  }
+}
+
+function chackSmartRoadRight(n: number) {
+
+  //const tileLeft = store.placedTiles[n - 1]
+  //const tileRight = store.placedTiles[n + 1]?.img
+  const tileLeftBottom = store.placedTiles[n - props.canvasWidth -1]?.img
+  const tileRightTop = store.placedTiles[n + props.canvasHeight - 1]?.img
+
+  if (tileRightTop === 'RoadCurve.png' || tileRightTop === 'RoadStrait.png') {
+    store.placedTiles[n-1] = {
+      img:  'RoadInterSection.png',
+      rotation: 0
+    }
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+    if (tileLeftBottom === 'RoadCurve.png' || tileLeftBottom === 'RoadStrait.png'){
+      store.placedTiles[n-1] = {
+        img:  'RoadInterSection.png',
+        rotation: 0
+      }
+      store.placedTiles[n] = {
+        img:  store.storedTileIMG!,
+        rotation: 0
+      }
+    }
+  }else {
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+  }
+}
+
+function chackSmartDirtRight(n: number) {
+
+  //const tileLeft = store.placedTiles[n - 1]
+  //const tileRight = store.placedTiles[n + 1]?.img
+  const tileLeftBottom = store.placedTiles[n - props.canvasWidth -1]?.img
+  const tileRightTop = store.placedTiles[n + props.canvasHeight - 1]?.img
+
+  if (tileRightTop === 'DirtCurve.png' || tileRightTop === 'DirtStrait.png') {
+    store.placedTiles[n-1] = {
+      img:  'DirtInterSection.png',
+      rotation: 0
+    }
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+    if (tileLeftBottom === 'DirtCurve.png' || tileLeftBottom === 'DirtStrait.png'){
+      store.placedTiles[n-1] = {
+        img:  'DirtInterSection.png',
+        rotation: 0
+      }
+      store.placedTiles[n] = {
+        img:  store.storedTileIMG!,
+        rotation: 0
+      }
+    }
+  }else {
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+  }
+}
+
+function chackSmartDirtLeft(n: number) {
+
+  //const tileLeft = store.placedTiles[n - 1]
+  //const tileRight = store.placedTiles[n + 1]?.img
+  const tileLeftBottom = store.placedTiles[n - props.canvasWidth +1]?.img
+  const tileRightTop = store.placedTiles[n + props.canvasHeight + 1]?.img
+
+  if (tileRightTop === 'DirtCurve.png' || tileRightTop === 'DirtStrait.png') {
+    store.placedTiles[n+1] = {
+      img:  'DirtInterSection.png',
+      rotation: 0
+    }
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+    if (tileLeftBottom === 'DirtCurve.png' || tileLeftBottom === 'DirtStrait.png'){
+      store.placedTiles[n+1] = {
+        img:  'DirtInterSection.png',
+        rotation: 0
+      }
+      store.placedTiles[n] = {
+        img:  store.storedTileIMG!,
+        rotation: 0
+      }
+    }
+  }else {
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
+  }
+}
 const placeTile = (n: number) => {
-  store.placedTiles[n] = {
-  img:  store.storedTileIMG!,
-  rotation: 0
+
+  if (smartRoadChack.value === true) {
+    if (store.storedTileIMG === 'RoadCurve.png' || store.storedTileIMG === 'RoadStrait.png') {
+      console.log('triggered road')
+      chackSmartRoadLeft(n);
+      chackSmartRoadRight(n)
+    }
+    if (store.storedTileIMG === 'DirtCurve.png' || store.storedTileIMG === 'DirtStrait.png') {
+      console.log("triggers Dirt")
+      chackSmartDirtLeft(n);
+     chackSmartDirtRight(n);
+    }
+  } else {
+    store.placedTiles[n] = {
+      img:  store.storedTileIMG!,
+      rotation: 0
+    }
   }
 }
 
@@ -46,6 +196,8 @@ const props = withDefaults(
     }
 )
 
+
+
 </script>
 
 <template>
@@ -67,7 +219,10 @@ const props = withDefaults(
          backgroundColor: store.placedTiles[n] ? 'transparent' : 'white'
        }"
   ></div>
-
+  <div id="smart-container">
+    <label for="smart-chackbox">Smart Road (experimental):</label>
+    <input type="checkbox" id="smart-chackbox" v-model="smartRoadChack">
+  </div>
 </div>
 </template>
 
