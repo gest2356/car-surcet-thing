@@ -202,7 +202,7 @@ const props = withDefaults(
 
 <template>
 <div id="canvas-container">
-  <div v-for="n in props.canvasHeight * props.canvasWidth"
+  <div id="pixels" v-for="n in props.canvasHeight * props.canvasWidth"
        :key="n"
        class="pixel"
        :class="{ hovered: selectedPixel === n }"
@@ -231,18 +231,23 @@ const props = withDefaults(
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(v-bind(props.canvasWidth), 64px);
-  grid-template-rows: repeat(v-bind(props.canvasHeight), 64px );
+  grid-template-columns: repeat(v-bind(props.canvasWidth), 32px);
+  grid-template-rows: repeat(v-bind(props.canvasHeight), 32px );
   gap: 1px;
 }
 
 .pixel {
-  width: 64px;
-  height: 64px;
+  width: 32px;
+  height: 32px;
   background-size: contain;
 }
 
 .hovered {
   border: 1px solid black;
 }
+
+#pixels {
+
+}
+
 </style>

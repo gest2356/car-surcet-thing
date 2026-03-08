@@ -59,4 +59,25 @@ const store = useTileStore();
   width: 128px;
   height: 128px;
 }
+
+#pallet-components {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: white solid 1px;
+  width: fit-content;
+  padding: 30px 5px 5px 30px;
+  margin-right: 5px;
+}
+
+.component {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  text-align: center;
+  border: white solid 1px;
+  gap: 10px;
+  margin-bottom: 40px;
+}
 </style>

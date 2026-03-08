@@ -118,26 +118,37 @@ function processImportedSurcet(fileName: string, content: string) {
 <template>
   <div id="menu-container">
     <div id="menu-content">
-      <h1>Car surcet Thing</h1>
-      <span>Make your dream surcet a reality</span>
-      <button @click="newSurcet">New surcet</button>
 
-      <span>Save</span>
-      <input type="text" v-model="saveName">
-      <button @click="saveSurcet">Save</button>
-      <button @click="exportFile(store.placedTiles, saveName)">Export</button>/
+      <div id="title-text">
+        <h1>Car surcet Thing</h1>
+        <span>Make your dream surcet a reality</span>
+      </div>
 
-      <span>Load</span>
-      <select name="" id="" v-model="selectedSaveKey">
-        <option :value="savedSurcetsNames[n-1]" v-for="n in savedSurcetsCount" :key="n-1" >{{savedSurcetsNames[n-1]}}</option>
-      </select>
-      <button @click="loadSurcet">Load</button>
-      <button @click="openImportDialog">Pick File</button>
+      <div id="new-surcet-input-container">
+        <button @click="newSurcet">New surcet</button>
+      </div>
 
-      <span>Return</span>
-      <button @click="returnToSurcet"> return</button>
+      <div id="file-manipulation-container">
+        <div id="save-inputs-container">
+            <span class="span-file-manupulate">Save</span>
+            <input type="text" v-model="saveName">
+            <button @click="saveSurcet">Save</button>
+            <button @click="exportFile(store.placedTiles, saveName)">Export</button>/
+        </div>
+        <div id="load-inputs-container">
+            <span class="span-file-manupulate">Load</span>
+            <select name="" id="" v-model="selectedSaveKey">
+            <option :value="savedSurcetsNames[n-1]" v-for="n in savedSurcetsCount" :key="n-1" >{{savedSurcetsNames[n-1]}}</option>
+            </select>
+            <button @click="loadSurcet">Load</button>
+            <button @click="openImportDialog">Pick File</button>
+         </div>
+      </div>
+        <div id="return-input-container">
+          <button @click="returnToSurcet"> return</button>
+        </div>
+      </div>
     </div>
-  </div>
 </template>
 
 <style scoped>
@@ -159,36 +170,101 @@ function processImportedSurcet(fileName: string, content: string) {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2vw;
+  flex-wrap: wrap;
   background-color: gray;
   width: 80%;
   height: 100%;
+  border-radius: 35px;
 }
 
-#menu-content h1 {
+#menu-content div {
+  height: auto;
+}
+
+#title-text h1 {
   font-size: 5vw;
 }
 
-#menu-content span {
+#title-text span {
   font-size: 3vw;
 }
 
-#menu-content button {
-  width: 800px;
+#new-surcet-input-container {
+  height: 40%;
+}
+
+button {
+  width: auto;
+  padding: 40px;
+  font-size: 40px;
+}
+
+input {
+  width: 20vw;
   height: 200px;
   font-size: 80px;
 }
 
-#menu-content input {
-  width: 800px;
+select {
+  width: 20vw;
   height: 200px;
   font-size: 80px;
 }
 
-#menu-content select {
-  width: 800px;
-  height: 200px;
-  font-size: 80px;
+
+#new-surcet-input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
+#file-manipulation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#file-manipulation-container div {
+  width: 100%;
+}
+
+#save-inputs-container {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+#save-inputs-container button {
+  width: 20%;
+}
+
+#save-inputs-container input {
+  width: 30%;
+  height: 100%;
+}
+
+#load-inputs-container {
+  margin-bottom: 20px;
+  display: flex;
+
+}
+
+#load-inputs-container button {
+  width: 20%;
+}
+
+#load-inputs-container select {
+  width: 30%;
+  height: 100%;
+}
+
+.span-file-manupulate {
+  font-size: 3vw;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 10px;
+  padding-top: 50px;
+  width: 30%;
+}
 </style>

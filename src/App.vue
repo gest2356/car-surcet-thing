@@ -24,10 +24,18 @@ let gridHeight = ref<number>(25)
     <button @click="showMenu =true">Show Menu </button>
 
     <div id="drawing-components">
-      <SurcetPallet />
-      <CurrentlySelectedTile />
-      <DrawingCanvas :canvasWidth="gridWidth" :canvasHeight="gridHeight" />
-      <CanvasSizeMenu @grid-size="changeGridSize" />
+      <div id="drawing-canvas">
+        <div id="drawing-components-container">
+          <SurcetPallet />
+          <CurrentlySelectedTile />
+        </div>
+        <div id="drawing-canvas-container">
+          <DrawingCanvas :canvasWidth="gridWidth" :canvasHeight="gridHeight" />
+        </div>
+      </div>
+      <div id="drawing-settings">
+        <CanvasSizeMenu @grid-size="changeGridSize" />
+      </div>
 
     </div>
 
@@ -35,12 +43,23 @@ let gridHeight = ref<number>(25)
 </template>
 
 <style scoped>
-  #app {
-    background-color: #2c3e50;
-    padding-bottom: 100%;
+#app {
+  background-color: #2c3e50;
+  padding-bottom: 100%;
 
-  }
-  button {
-    background-color: red;
-  }
+}
+button {
+  background-color: red;
+}
+
+#drawing-components-container div {
+  margin-bottom: 10px;
+}
+
+#drawing-canvas{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 </style>
